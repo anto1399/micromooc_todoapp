@@ -1,4 +1,4 @@
-# Import Dependencies
+# Import required packages amd modules
 from django.urls import path
 from .views import HomePageView
 

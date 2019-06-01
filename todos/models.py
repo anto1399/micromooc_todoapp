@@ -12,7 +12,7 @@ class Todo(models.Model):
         ('completed', 'Done')
     )
     title = models.CharField(max_length=200)
-    description = models.TextField()
+    description = models.TextField(blank=True, null=True)
     creator = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='todos_creates')
     status = models.CharField(
