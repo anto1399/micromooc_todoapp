@@ -1,1 +1,1 @@
-web: gunicorn pages_project.wsgi --log-file -
+web: gunicorn micromooc_todoapp.wsgi --log-file -
