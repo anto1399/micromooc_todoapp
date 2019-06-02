@@ -23,7 +23,7 @@ Used Simple SQLite Database because the app is very simple and no extesive confi
 To Just Try, You can login with: 
 # Username: josep & Password: password
 
-# The Project is also hosted on HEROKU via the URL (Sorry about the UI, I have not configured the static files properly):
+The Project is also hosted on HEROKU via the URL (Sorry about the UI, I have not configured the static files properly):
 https://glacial-castle-43359.herokuapp.com 
 
 
