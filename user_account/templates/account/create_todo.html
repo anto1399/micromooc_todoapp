@@ -2,10 +2,12 @@
 
 {% block content %}
 
-<h1>New Todo Item</h1>
-    <form action="." method="post">
+<div class="container">
+    <h1>New Todo Item</h1>
+    <form action="." method="post" class="form" role="form">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="Save" />
     </form>
+</div>
 {% endblock content %}

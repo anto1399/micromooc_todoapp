@@ -3,13 +3,16 @@
 {% block title %}Create an account{% endblock %}
 
 {% block content %}
+<div class="container">
   <h1>Create an account</h1>
   <p>Please, sign up using this form: Do you have an account already? <a
     href="{% url "login" %}">Login here</a></p>
     
-  <form action="." method="post">
+  <form action="." method="post" class="form" role="form">
     {{ user_form.as_p }}
     {% csrf_token %}
     <p><input type="submit" value="Create my account"></p>
   </form>
+</div>
+  
 {% endblock %}

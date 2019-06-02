@@ -2,9 +2,9 @@
 
 {% block content %}
 
-<div>
-    <h1>{{ todo.title }}</h1>
-    <p>{{ todo.description }}</p>
-    <a href="{% url 'todo_edit' todo.pk %}">+ Edit Blog Post</a>
+<div class="container">
+        <h1>{{ todo.title }}</h1>
+        <p>{{ todo.description }}</p>
+        <a href="{% url 'todo_edit' todo.pk %}">+ Edit Blog Post</a>
 </div>
 {% endblock content %}
