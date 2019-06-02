@@ -6,15 +6,16 @@ from django.contrib.auth.models import User
 
 # ToDo class with attributes definition. creator (User who created todos), status with one choices at active or completed
 
-# All Active Todos for a authenticated user
+# All Active Todos for an authenticated user
 class ActiveTodosManager(models.Manager):
     def get_queryset(self):
         return super(ActiveTodosManager, self).get_queryset().filter(status='active')
 
-# All Completed Todos for a authenticated user
+# All Completed Todos for an authenticated user
 class CompletedTodosManager(models.Manager):
     def get_queryset(self):
         return super(CompletedTodosManager, self).get_queryset().filter(status='completed')
+
 
 
 class Todo(models.Model):
@@ -48,3 +49,6 @@ class Todo(models.Model):
     def __str__(self):
         return self.title
 
+# Utility for refrencing the Todo object in the URL template name
+    def get_absolute_url(self): # new
+        return reverse('todo_details', args=[str(self.id)])

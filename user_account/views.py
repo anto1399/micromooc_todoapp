@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
 from todos.models import Todo, CompletedTodosManager, ActiveTodosManager
+from django.views.generic.edit import CreateView
 
 
 # User Login Action
@@ -89,8 +90,7 @@ def completed_todos(request):
 
 
 # Get a single todo details
-# def todo_details(request, todo_id):
-#     todo = get_object_or_404(Todo)
-
-
-    
+@login_required
+def todo_details(request, todo_id):
+    todo = get_object_or_404(Todo, id=todo_id)
+    return render(request, 'account/todo_details.html', {'todo': todo})

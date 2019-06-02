@@ -1,6 +1,7 @@
 # Importing Dependencies
 from django import forms
 from django.contrib.auth.models import User
+from todos.models import Todo
 
 
 # Creating Login Forms Class For Users
@@ -22,3 +23,4 @@ class UserRegistrationForm(forms.ModelForm):
         if cd['password'] != cd['password2']:
             raise forms.ValidationError('Passwords don\'t match.')
         return cd['password2']
+
