@@ -18,7 +18,7 @@ path('completed/', views.completed_todos, name='completed_todos'),
 path('todo/<int:todo_id>/', views.todo_details, name='todo_details'),
 path('todo/create/', TodoCreateView.as_view(), name='create_todo'),
 path('todo/<int:pk>/edit/', TodoUpdateView.as_view(), name='todo_edit'),
-path('post/<int:pk>/delete/', TodoDeleteView.as_view(), name='todo_delete'),
+path('todo/<int:pk>/delete/', TodoDeleteView.as_view(), name='todo_delete'),
 
 # change password URLs
 path('password_change/', auth_views.PasswordChangeView.as_view(), name='password_change'),
