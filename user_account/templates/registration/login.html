@@ -9,13 +9,14 @@
     {% else %}
         <p>Please, use the this form to log-in and create TODOs: If you don't have an account <a
             href="{% url "register" %}">register here</a></p>
+        <p>Wants To Test It? Try With <b>Username: josep and Password: password</b></p>
     {% endif %}
     <div class="login-form">
-    <form action="{% url 'login' %}" method="post">
-        {{ form.as_p }}
-        {% csrf_token %}
-        <input type="hidden" name="next" value="{{ next }}" />
-        <p><input type="submit" value="Log-in" /></p>
-    </form>
+        <form action="{% url 'login' %}" method="post">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}" />
+            <p><input type="submit" value="Log-in" /></p>
+        </form>
     </div>
 {% endblock %}

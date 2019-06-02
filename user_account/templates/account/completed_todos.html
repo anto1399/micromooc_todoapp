@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}My Completed Todos{% endblock %}
+
+{% block content %}
+<div class="container">
+        <h1>MY COMPLETED TODOS</h1><span><a href="{% url "create_todo" %}"><strong>+Create New</strong></a> </span>
+    
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>TODO TITLE</th>
+                        <th>STATUS</th>
+                        <th>CREATED AT</th>
+                        <th>ACTIONS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for todo in completed_todos %}
+                    <tr>
+                        <td>{{ todo.title }}</td>
+                        <td>{{ todo.status }}</td>
+                        <td> {{ todo.created_at }}</td>
+                        <td>
+                            <a href="{% url "todo_details" todo.pk %}">View</a>
+                            <a href="{% url 'todo_edit' todo.pk %}">Edit</a>
+                            <a href="{% url 'todo_delete' todo.pk %}">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+    </div>
+{% endblock %}

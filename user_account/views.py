@@ -1,28 +1,35 @@
 # Importing Dependencies
+
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import authenticate, login
 from .forms import LoginForm, UserRegistrationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.contrib.auth.models import User
+from todos.models import Todo, CompletedTodosManager, ActiveTodosManager
+from django.views.generic.edit import CreateView
+
 
 # User Login Action
+
 def user_login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
+            # Authenticate the user and redirect to the dashboard
             user = authenticate(request,
                     username=cd['username'],
                     password=cd['password'])
             if user is not None:    
                 if user.is_active:
                     login(request, user)
-                    return HttpResponse('Authenticated successfully')
+                    return render(request, 'account/dashboard.html', {'section': 'dashboard'})
                 else:
-                    return HttpResponse('Disabled account')
+                    messages.error(request, 'Account is Disabled')
             else:
-                return HttpResponse('Invalid login')
+                messages.error(request, 'Invalid Login Details')   
     else:
         # Send the login form to user to enter login credentials for GET http request
         form = LoginForm()
@@ -30,6 +37,7 @@ def user_login(request):
 
 
 # User Registration Action
+
 def register(request):
     if request.method == 'POST':
         user_form = UserRegistrationForm(request.POST)
@@ -47,18 +55,42 @@ def register(request):
             if user is not None:    
                 if user.is_active:
                     login(request, user)
-                    return render(request, 'account/dashboard.html', {'section': 'dashboard'})
-                else:
-                    return HttpResponse('Disabled account')
-            else:
-                return HttpResponse('Invalid login')              
+                    messages.success(request, 'You have successfuly created a new account, Begin creating your TODOs')
+                    return render(request, 'account/dashboard.html', {'section': 'dashboard'})         
     else:
         # Send the Registration form to user to enter login credentials for GET http request
         user_form = UserRegistrationForm()
     return render(request, 'account/register.html', {'user_form': user_form})
 
 
-# User is directed to dashboard after successful login, "section" is used to check the page of the auth user
+# Check if user is authenticated before sending to dashboard, else show login page
 @login_required
+
+# User is directed to dashboard after successful login, together with his ToDos items
 def dashboard(request):
-    return render(request, 'account/dashboard.html', {'section': 'dashboard'})
+    # Get All Todos Associated with the Authenticated User
+    all_user_todos = Todo.todos.filter(creator=request.user)
+    return render(request, 'account/dashboard.html', {'section': 'dashboard', 'my_todos': all_user_todos})
+
+
+#Get all ACTIVE todos of the authenticated user
+@login_required
+def active_todos(request):
+    # Get All Todos Associated with the Authenticated User
+    active_user_todos = Todo.active.filter(creator=request.user)
+    return render(request, 'account/active_todos.html', {'section': 'active', 'active_todos': active_user_todos})
+
+
+#Get all COMPLETED todos of the authenticated user
+@login_required
+def completed_todos(request):
+    # Get All Todos Associated with the Authenticated User
+    completed_user_todos = Todo.completed.filter(creator=request.user)
+    return render(request, 'account/completed_todos.html', {'section': 'completed', 'completed_todos': completed_user_todos})
+
+
+# Get a single todo details
+@login_required
+def todo_details(request, todo_id):
+    todo = get_object_or_404(Todo, id=todo_id)
+    return render(request, 'account/todo_details.html', {'todo': todo})
