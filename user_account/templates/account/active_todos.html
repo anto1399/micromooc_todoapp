@@ -1,13 +1,11 @@
-
 {% extends "base.html" %}
 
-{% block title %}Your Personalized Dashboard{% endblock %}
+{% block title %}My Active Todos{% endblock %}
 
 {% block content %}
-    <h1>ALL MY YOUR TODOS</h1>
-   
+    <h1>MY ACTIVE TODOS</h1>
     
-    {% for todo in my_todos %}
+    {% for todo in active_todos %}
         <h2>
         <a href="#">
         {{ todo.title }}

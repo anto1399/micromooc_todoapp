@@ -1,13 +1,12 @@
-
 {% extends "base.html" %}
 
-{% block title %}Your Personalized Dashboard{% endblock %}
+{% block title %}My Completed Todos{% endblock %}
 
 {% block content %}
-    <h1>ALL MY YOUR TODOS</h1>
-   
+    <h1>ALL COMPLETED TODOS</h1>
     
-    {% for todo in my_todos %}
+    
+    {% for todo in completed_todos %}
         <h2>
         <a href="#">
         {{ todo.title }}
