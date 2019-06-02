@@ -1,0 +1,41 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <link href="{% static "css/base.css" %}" rel="stylesheet">
+</head>
+<body>
+    <div id="header">
+        <span class="logo"><a href ="{% url "dashboard" %}"> MicroMOOC ToDo Application</a></span>
+        {% if request.user.is_authenticated %}
+            <ul class="menu">
+                <li {% if section == "dashboard" %}class="selected"{% endif %}>
+                    <a href="{% url "dashboard" %}">All My ToDos</a>
+                </li>
+                <li {% if section == "Active ToDos" %}class="selected"{% endif %}>
+                    <a href="#">Active ToDos</a>
+                </li>
+                <li {% if section == "Completed" %}class="selected"{% endif %}>
+                    <a href="#">Completed</a>
+                </li>
+            </ul>
+        {% endif %}
+        <span class="user">
+            {% if request.user.is_authenticated %}
+                Hello {{ request.user.first_name }},
+                    <a href="{% url "password_change" %}">Change Password</a>
+                    <a href="{% url "logout" %}">Logout</a>
+            {% else %}
+                <a href="{% url "login" %}">Log-in</a>
+            {% endif %}
+        </span>
+    </div>
+    <div id="content">
+        {% block content %}
+        
+        {% endblock %}
+    </div>
+</body>
+</html
