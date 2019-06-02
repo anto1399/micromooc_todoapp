@@ -127,6 +127,8 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+
 # Authentication Default URL
 LOGIN_REDIRECT_URL = 'dashboard'
 LOGIN_URL = 'login'
