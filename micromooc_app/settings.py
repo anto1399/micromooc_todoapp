@@ -25,7 +25,7 @@ SECRET_KEY = 'pta=*=lfu&+l)6)z)5#x6xq#j-8^-)q$6p=6uif!$tv=ad=y01'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
